@@ -100,10 +100,10 @@
     submitBtn.disabled = true;
     submitBtn.textContent = "Liberando seu acesso…";
 
-    try { localStorage.setItem(STORE, JSON.stringify({ nome: lead.nome, empresa: lead.empresa, email: lead.email, whatsapp: lead.whatsapp, desafio: lead.desafio, colaboradores: lead.colaboradores })); } catch (err) {}
+    try { localStorage.setItem(STORE, JSON.stringify({ nome: lead.nome, associacao: lead.associacao, email: lead.email, whatsapp: lead.whatsapp, desafio: lead.desafio, associados: lead.associados })); } catch (err) {}
 
     window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: "lead_workshop", segmento: lead.segmento, colaboradores: lead.colaboradores, cargo: lead.cargo });
+    window.dataLayer.push({ event: "lead_workshop", segmento: lead.segmento, associados: lead.associados, cargo: lead.cargo });
     if (typeof window.fbq === "function") window.fbq("track", "Lead");
 
     var next = "workshop.html?n=" + encodeURIComponent(lead.nome.split(" ")[0]);
@@ -122,19 +122,19 @@
   /* ---------- Calculadora ---------- */
   var brl = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
   var $ = function (id) { return document.getElementById(id); };
-  var inputs = ["cPeople", "cCost", "cWaste"].map($);
+  var num = new Intl.NumberFormat("pt-BR");
+  var inputs = ["cMembers", "cFee", "cChurn"].map($);
   function fill(el) {
     var p = ((el.value - el.min) / (el.max - el.min)) * 100;
     el.style.setProperty("--p", p + "%");
   }
   function calc() {
-    var people = +inputs[0].value, cost = +inputs[1].value, waste = +inputs[2].value;
-    $("oPeople").textContent = people;
-    $("oCost").textContent = brl.format(cost);
-    $("oWaste").textContent = waste + "%";
-    var month = people * cost * (waste / 100);
-    $("rMonth").textContent = brl.format(month) + " / mês";
-    $("rYear").textContent = brl.format(month * 12);
+    var members = +inputs[0].value, fee = +inputs[1].value, churn = +inputs[2].value;
+    $("oMembers").textContent = num.format(members);
+    $("oFee").textContent = brl.format(fee);
+    $("oChurn").textContent = churn + "%";
+    // associados × mensalidade × 12 × % que não renova
+    $("rYear").textContent = brl.format(members * fee * 12 * (churn / 100));
     inputs.forEach(fill);
   }
   inputs.forEach(function (el) { el.addEventListener("input", calc); });

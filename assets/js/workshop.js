@@ -41,11 +41,11 @@
   });
 
   /* ---------- Reunião de diagnóstico ---------- */
-  var msg = "Olá, Guilherme! Assisti ao workshop \"" + (cfg.WORKSHOP || "O lucro escondido na sua operação") +
+  var msg = "Olá, Guilherme! Assisti ao workshop \"" + (cfg.WORKSHOP || "Rotinas de IA para renovação e recuperação de associados") +
     "\" e quero agendar a reunião de diagnóstico." +
     (lead.nome ? "\n\nNome: " + lead.nome : "") +
-    (lead.empresa ? "\nEmpresa: " + lead.empresa : "") +
-    (lead.colaboradores ? "\nColaboradores: " + lead.colaboradores : "") +
+    (lead.associacao ? "\nAssociação: " + lead.associacao : "") +
+    (lead.associados ? "\nAssociados: " + lead.associados : "") +
     (lead.desafio ? "\nMaior desafio: " + lead.desafio : "");
   var diagUrl = cfg.AGENDA_URL || ("https://wa.me/" + (cfg.WHATSAPP || "5561996490474") + "?text=" + encodeURIComponent(msg));
   var diagLinks = [document.getElementById("ctaDiag")].concat([].slice.call(document.querySelectorAll("[data-diag]")));

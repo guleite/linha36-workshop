@@ -13,5 +13,5 @@ window.L36 = {
   // Link de agenda para a reunião de diagnóstico (Calendly, Google Agenda...). Vazio = o botão usa o WhatsApp.
   AGENDA_URL: "",
 
-  WORKSHOP: "O lucro escondido na sua operação",
+  WORKSHOP: "Rotinas de IA para renovação e recuperação de associados",
 };
